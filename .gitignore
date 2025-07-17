@@ -205,3 +205,34 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Python (Django)
+backend/__pycache__/
+backend/core/__pycache__/
+backend/*.pyc
+backend/venv/
+backend/db.sqlite3
+backend/media/
+
+# Node (Next.js)
+frontend/.next/
+frontend/node_modules/
+frontend/.env.local
+
+# Logs
+*.log
+
+# Docker
+*.pid
+*.sock
+
+# VSCode
+.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# geral
+*.env
+.env.*
