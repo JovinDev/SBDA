@@ -1,0 +1,9 @@
+from ninja import NinjaAPI
+from .models import Trabalho
+from .schemas import TrabalhoSchema
+
+api = NinjaAPI()
+
+@api.get("/trabalhos")
+def listar_trabalhos(request):
+    return list(Trabalho.objects.values())
