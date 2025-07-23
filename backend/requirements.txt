@@ -1,0 +1,15 @@
+# Django e API
+django>=4.2
+djangorestframework
+django-ninja
+
+# Autenticação JWT
+djangorestframework-simplejwt
+
+# PostgreSQL
+psycopg2-binary
+
+# Variáveis de ambiente
+python-dotenv
+
+uvicorn[standard]
