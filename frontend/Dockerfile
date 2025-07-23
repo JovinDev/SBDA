@@ -1,24 +1,20 @@
-FROM node:lts-alpine
+FROM node:20-alpine AS builder
 
-# Defina o diretório de trabalho
 WORKDIR /app
-
-# Copia arquivos de dependências
-COPY app/package*.json ./
-
-# Instale as dependênciass
+COPY app/package*.json ./app/
+WORKDIR /app/app
 RUN npm install
 
-# Copie todo o projeto para o container
-COPY /app .
+COPY app ./app
+RUN npm run build  # <- ESSENCIAL
 
-# Construa a aplicação
-RUN npm run build
+FROM node:20-alpine AS runner
+WORKDIR /app/app
 
-# Exponha a porta
-EXPOSE 3000:3000
+COPY --from=builder /app/app/.next ./.next
+COPY --from=builder /app/app/node_modules ./node_modules
+COPY --from=builder /app/app/public ./public
+COPY --from=builder /app/app/package.json ./package.json
 
-# Use http-server para servir o conteúdo da pasta dist
-RUN npm install -g http-server
-
-CMD ["http-server", "dist"]
+EXPOSE 3000
+CMD ["npm", "start"]

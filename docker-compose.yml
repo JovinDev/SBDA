@@ -10,14 +10,15 @@ services:
       - db
 
   frontend:
-    build: ./frontend
-    container_name: frontend-vue
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile    # Dockerfile está aqui
+    container_name: next-frontend
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend/SBDA-vue:/app
     depends_on:
       - backend
+
 
   db:
     image: postgres:16
